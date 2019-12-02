@@ -10,11 +10,6 @@ export class List {
   }
 
   get list() {
-    this.listElement.style.padding = "0px";
-    this.listElement.style.margin = "0px";
-    this.listElement.style.width = 480 + "px";
-    this.listElement.style.borderCollapse = "collapse";
-    this.listElement.style.borderTop = "none";
 
     for (let i = 0; i < 5; i++) {
       const item = new Item();

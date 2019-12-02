@@ -4,7 +4,7 @@ export class Footer {
   }
 
   render(anchor) {
-    this.text = document.createElement("h6");
+    this.text = document.createElement("p");
     this.text.innerText = "Create by Anton Solovyov";
     this.text.style.fontWeight = 200;
 

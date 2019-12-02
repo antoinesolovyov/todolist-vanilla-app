@@ -10,28 +10,13 @@ export class Item {
 
   get item() {
     // set checkbox style
-    this.checkboxElement.style.padding = "0px";
-    this.checkboxElement.style.margin = "0px";
-    this.checkboxElement.style.width = 48 + "px";
-    this.checkboxElement.style.height = 48 + "px";
-    this.checkboxElement.style.backgroundImage = "url('icons/square-icon.svg')";
-    this.checkboxElement.style.backgroundRepeat = "no-repeat";
-    this.checkboxElement.style.backgroundPosition = "center";
+    this.checkboxElement.className = "checkbox";
 
     // set task style
-    this.taskElement.style.padding = "0px";
-    this.taskElement.style.margin = "0px";
-    this.taskElement.style.width = 384 + "px";
-    this.taskElement.style.height = 48 + "px";
+    this.taskElement.className = "task";
 
     // set delete style
-    this.deleteElement.style.padding = "0px";
-    this.deleteElement.style.margin = "0px";
-    this.deleteElement.style.width = 48 + "px";
-    this.deleteElement.style.height = 48 + "px";
-    this.deleteElement.style.backgroundImage = "url('icons/x-icon.svg')";
-    this.deleteElement.style.backgroundRepeat = "no-repeat";
-    this.deleteElement.style.backgroundPosition = "center";
+    this.deleteElement.className = "delete";
 
     // append
     this.itemElement.append(
