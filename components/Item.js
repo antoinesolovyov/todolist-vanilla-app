@@ -1,24 +1,48 @@
 export class Item {
-    constructor() {
-        this.itemElement = document.createElement("tr");
+  constructor() {
+    // create item elements
+    this.itemElement = document.createElement("tr");
+    this.checkboxElement = document.createElement("td");
+    this.taskElement = document.createElement("td");
+    this.taskElement.innerText = "What needs to be done?";
+    this.deleteElement = document.createElement("td");
+  }
 
-        this.checkboxElement = document.createElement("td");
-        this.checkboxElement.innerText = "check";
+  get item() {
+    // set checkbox style
+    this.checkboxElement.style.padding = "0px";
+    this.checkboxElement.style.margin = "0px";
+    this.checkboxElement.style.width = 48 + "px";
+    this.checkboxElement.style.height = 48 + "px";
+    this.checkboxElement.style.backgroundImage = "url('icons/square-icon.svg')";
+    this.checkboxElement.style.backgroundRepeat = "no-repeat";
+    this.checkboxElement.style.backgroundPosition = "center";
 
-        this.taskElement = document.createElement("td");
-        this.taskElement.innerText = "task";
+    // set task style
+    this.taskElement.style.padding = "0px";
+    this.taskElement.style.margin = "0px";
+    this.taskElement.style.width = 384 + "px";
+    this.taskElement.style.height = 48 + "px";
 
-        this.deleteElement = document.createElement("td");
-        this.deleteElement.innerText = "delete";
-    }
+    // set delete style
+    this.deleteElement.style.padding = "0px";
+    this.deleteElement.style.margin = "0px";
+    this.deleteElement.style.width = 48 + "px";
+    this.deleteElement.style.height = 48 + "px";
+    this.deleteElement.style.backgroundImage = "url('icons/x-icon.svg')";
+    this.deleteElement.style.backgroundRepeat = "no-repeat";
+    this.deleteElement.style.backgroundPosition = "center";
 
-    get item() {
-        this.itemElement.append(this.checkboxElement, this.taskElement, this.deleteElement);
+    // append
+    this.itemElement.append(
+      this.checkboxElement,
+      this.taskElement,
+      this.deleteElement
+    );
 
-        return this.itemElement;
-    }
+    // return
+    return this.itemElement;
+  }
 
-    set item(task) {
-
-    }
+  set item(task) {}
 }

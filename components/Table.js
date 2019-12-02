@@ -4,15 +4,19 @@ import { List } from "./List.js";
 // Table <- {Bar, List}
 
 export class Table {
+  constructor() {
+    this.table = document.createElement("div");
 
-    constructor() {
-        this.bar = new Bar();
-        this.list = new List();
-    }
+    this.bar = new Bar();
+    this.list = new List();
+  }
 
+  render(anchor) {
+    // set table style
+    this.table.style.border = "2px solid black";
 
-    render(anchor) {
-
-        anchor.append(this.bar.bar, this.list.list);
-    }
+    // append
+    this.table.append(this.bar.bar, this.list.list);
+    anchor.append(this.table);
+  }
 }
