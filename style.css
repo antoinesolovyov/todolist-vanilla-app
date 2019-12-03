@@ -1,0 +1,86 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Roboto Condensed;
+}
+
+form {
+  display: flex;
+  border: 2px solid black;
+  margin-bottom: 16px;
+}
+
+button {
+  background-image: url(icons/arrow-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+
+  width: 48px;
+  height: 48px;
+
+  border: none;
+  outline: none;
+}
+
+input {
+  width: 420px;
+  height: 48px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0px 0px 0px 12px;
+}
+
+input::placeholder {
+  font-family: "Roboto";
+  color: grey;
+  font-weight: 500;
+}
+
+table {
+  padding: 0px;
+  margin: 0px;
+
+  width: 480px;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0px;
+  margin: 0px;
+
+  width: 48px;
+  height: 48px;
+}
+
+.tab {
+  width: 160px;
+  text-align: center;
+  border-bottom: none;
+}
+
+.checkbox {
+  background-image: url(icons/square-icon.svg);
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.task {
+  padding: 0px;
+  width: 384px;
+}
+
+.delete {
+  background-image: url(icons/x-icon.svg);
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
