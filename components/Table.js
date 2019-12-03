@@ -26,7 +26,13 @@ export class Table {
     this._table.style.border = "2px solid black";
 
     // append
-    this._table.append(this._bar.bar, this._list.list);
+    if (this._bar.isUnfinished) {
+      this._table.append(this._bar.bar, this._list.unfinishedList);
+    } else if (this._bar.isFinished) {
+      this._table.append(this._bar.bar, this._list.finishedList);
+    } else {
+      this._table.append(this._bar.bar, this._list.allList);
+    }
     anchor.append(this._table);
   }
 }

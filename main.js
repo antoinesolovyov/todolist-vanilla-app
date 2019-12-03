@@ -58,21 +58,31 @@ input.button.onclick = () => {
 
     table.list.items[item.id] = item;
     table.list.count++;
+    table.list.unfinishedCount++;
 
-    table.bar.unfinishedCount = table.list.count;
+    table.bar.unfinishedCount = table.list.unfinishedCount;
+    table.bar.finishedCount = table.list.finishedCount;
     table.bar.allCount = table.list.count;
 
     // checkbox click event
     item.checkbox.addEventListener("click", () => {
-      if (item.checkbox.isFinished) {
+      if (item.isFinished) {
         item.task.style.textDecoration = "none";
         item.checkbox.style.backgroundImage = "url('icons/square-icon.svg')";
-        item.checkbox.isFinished = false;
+        item.isFinished = false;
+        table.list.unfinishedCount++;
+        table.list.finishedCount--;
+        table.bar.unfinishedCount = table.list.unfinishedCount;
+        table.bar.finishedCount = table.list.finishedCount;
       } else {
         item.task.style.textDecoration = "line-through";
         item.checkbox.style.backgroundImage =
           "url('icons/check-square-icon.svg')";
-        item.checkbox.isFinished = true;
+        item.isFinished = true;
+        table.list.unfinishedCount--;
+        table.list.finishedCount++;
+        table.bar.unfinishedCount = table.list.unfinishedCount;
+        table.bar.finishedCount = table.list.finishedCount;
       }
 
       render();
@@ -80,9 +90,16 @@ input.button.onclick = () => {
 
     // delete click event
     item.delete.addEventListener("click", () => {
+      if (item.isFinished) {
+        table.list.finishedCount--;
+        table.bar.finishedCount = table.list.finishedCount;
+      } else {
+        table.list.unfinishedCount--;
+        table.bar.unfinishedCount = table.list.unfinishedCount;
+      }
+
       delete table.list.items[item.id];
       table.list.count--;
-      table.bar.unfinishedCount = table.list.count;
       table.bar.allCount = table.list.count;
 
       render();
@@ -95,8 +112,8 @@ input.button.onclick = () => {
 };
 
 function render() {
-  header.render(headerEl);
+  header.render();
   input.render(articleEl);
   table.render(articleEl);
-  footer.render(footerEl);
+  footer.render();
 }
