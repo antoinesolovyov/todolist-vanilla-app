@@ -1,21 +1,29 @@
-import { Item } from "./Item.js";
-
-const list = [];
-
-// List <- { Item }
-
 export class List {
   constructor() {
-    this.listElement = document.createElement("table");
+    this._list = document.createElement("table");
+    this._items = {};
+    this._count = 0;
+  }
+
+  get items() {
+    return this._items;
+  }
+
+  get count() {
+    return this._count;
+  }
+
+  set count(count) {
+    this._count = count;
   }
 
   get list() {
+    this._list.innerHTML = "";
 
-    for (let i = 0; i < 5; i++) {
-      const item = new Item();
-      this.listElement.append(item.item);
+    for (let key in this._items) {
+      this._list.append(this._items[key].item);
     }
 
-    return this.listElement;
+    return this._list;
   }
 }

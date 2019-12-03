@@ -1,31 +1,44 @@
 export class Bar {
   constructor() {
     // create bar elements
-    this.barElement = document.createElement("table");
-    this.tabListElement = document.createElement("tr");
-    this.unfinishedTabElement = document.createElement("td");
-    this.unfinishedTabElement.innerText = "Unfinished [ 5 ]";
-    this.finishedTabElement = document.createElement("td");
-    this.finishedTabElement.innerText = "Finished [ 0 ]";
-    this.allTabElement = document.createElement("td");
-    this.allTabElement.innerText = "All [ 5 ]";
+    this._bar = document.createElement("table");
+    this._tabList = document.createElement("tr");
+    this._unfinished = document.createElement("td");
+    this._unfinished.innerText = "Unfinished [ 0 ]";
+    this._finished = document.createElement("td");
+    this._finished.innerText = "Finished [ 0 ]";
+    this._all = document.createElement("td");
+    this._all.innerText = "All [ 0 ]";
+  }
+
+  set unfinishedCount(count) {
+    this._unfinished.innerText = `Unfinished [ ${count} ]`;
+  }
+
+  set finishedCount(count) {
+    this._finished.innerText = `Finished [ ${count} ]`;
+  }
+
+  set allCount(count) {
+    this._all.innerText = `All [ ${count} ]`;
   }
 
   get bar() {
+    this._unfinished.style.borderRight = "2px solid black";
+    this._finished.style.borderRight = "2px solid black";
+    this._finished.style.borderBottom = "2px solid black";
+    this._all.style.borderBottom = "2px solid black";
+
     // set tabs style
-    this.unfinishedTabElement.className = "tab";
-    this.finishedTabElement.className = "tab";
-    this.allTabElement.className = "tab";
+    this._unfinished.className = "tab";
+    this._finished.className = "tab";
+    this._all.className = "tab";
 
     // append
-    this.tabListElement.append(
-      this.unfinishedTabElement,
-      this.finishedTabElement,
-      this.allTabElement
-    );
-    this.barElement.append(this.tabListElement);
+    this._tabList.append(this._unfinished, this._finished, this._all);
+    this._bar.append(this._tabList);
 
     // return
-    return this.barElement;
+    return this._bar;
   }
 }

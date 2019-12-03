@@ -1,33 +1,50 @@
 export class Item {
-  constructor() {
+  constructor(task) {
     // create item elements
-    this.itemElement = document.createElement("tr");
-    this.checkboxElement = document.createElement("td");
-    this.taskElement = document.createElement("td");
-    this.taskElement.innerText = "What needs to be done?";
-    this.deleteElement = document.createElement("td");
+    this._item = document.createElement("tr");
+    this._checkbox = document.createElement("td");
+    this._task = document.createElement("td");
+    this._task.innerText = task;
+    this._delete = document.createElement("td");
+
+    this._id = Date.now();
+    this._isFinished = false;
+  }
+
+  get id() {
+    return this._id;
+  }
+
+  get task() {
+    return this._task;
+  }
+
+  get delete() {Í
+    return this._delete;
   }
 
   get item() {
-    // set checkbox style
-    this.checkboxElement.className = "checkbox";
-
-    // set task style
-    this.taskElement.className = "task";
-
-    // set delete style
-    this.deleteElement.className = "delete";
+    // set item style
+    this._checkbox.className = "checkbox";
+    this._task.className = "task";
+    this._delete.className = "delete";
 
     // append
-    this.itemElement.append(
-      this.checkboxElement,
-      this.taskElement,
-      this.deleteElement
-    );
+    this._item.append(this._checkbox, this._task, this._delete);
 
     // return
-    return this.itemElement;
+    return this._item;
   }
 
-  set item(task) {}
+  set item(task) {
+    this._item.innerText = task;
+  }
+
+  set isFinished(flag) {
+    this._isFinished = flag;
+  }
+
+  get isFinished() {
+    return this._isFinished;
+  }
 }

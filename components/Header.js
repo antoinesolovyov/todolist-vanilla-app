@@ -1,14 +1,13 @@
 export class Header {
-  constructor() {
-    this.header = document.createElement("header");
+  constructor(element) {
+    this.header = document.createElement("h1");
+    this.anchor = element;
   }
 
-  render(anchor) {
-    this.text = document.createElement("h1");
-    this.text.innerText = "To Do List";
-    this.text.style.fontWeight = 400;
+  render() {
+    this.header.innerText = "To Do List";
+    this.header.style.fontWeight = 400;
 
-    this.header.append(this.text);
-    anchor.append(this.header);
+    this.anchor.append(this.header);
   }
 }

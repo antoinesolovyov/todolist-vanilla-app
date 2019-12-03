@@ -1,22 +1,32 @@
 import { Bar } from "./Bar.js";
 import { List } from "./List.js";
 
-// Table <- {Bar, List}
-
 export class Table {
   constructor() {
-    this.table = document.createElement("div");
+    this._table = document.createElement("div");
 
-    this.bar = new Bar();
-    this.list = new List();
+    this._bar = new Bar();
+    this._list = new List();
   }
+
+  get table() {
+    return this._table;
+  }
+
+  get bar() {
+    return this._bar;
+  }
+
+  get list() {
+    return this._list;
+  }Í
 
   render(anchor) {
     // set table style
-    this.table.style.border = "2px solid black";
+    this._table.style.border = "2px solid black";
 
     // append
-    this.table.append(this.bar.bar, this.list.list);
-    anchor.append(this.table);
+    this._table.append(this._bar.bar, this._list.list);
+    anchor.append(this._table);
   }
 }
