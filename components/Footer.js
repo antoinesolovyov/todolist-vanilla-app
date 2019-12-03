@@ -5,7 +5,7 @@ export class Footer {
   }
 
   render() {
-    this.footer.innerText = "Create by Anton Solovyov";
+    this.footer.innerText = "Created by Anton Solovyov";
     this.footer.style.fontWeight = 200;
 
     this.anchor.append(this.footer);

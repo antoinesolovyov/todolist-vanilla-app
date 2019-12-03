@@ -9,6 +9,10 @@ export class Bar {
     this._finished.innerText = "Finished [ 0 ]";
     this._all = document.createElement("td");
     this._all.innerText = "All [ 0 ]";
+
+    this.isUnfinished = true;
+    this.isFinished = false;
+    this.isAll = false;
   }
 
   set unfinishedCount(count) {
@@ -23,11 +27,35 @@ export class Bar {
     this._all.innerText = `All [ ${count} ]`;
   }
 
+  get finished() {
+    return this._finished;
+  }
+
+  get unfinished() {
+    return this._unfinished;
+  }
+
+  get all() {
+    return this._all;
+  }
+
   get bar() {
     this._unfinished.style.borderRight = "2px solid black";
     this._finished.style.borderRight = "2px solid black";
-    this._finished.style.borderBottom = "2px solid black";
-    this._all.style.borderBottom = "2px solid black";
+
+    if (this.isUnfinished) {
+      this._unfinished.style.borderBottom = "none";
+      this._finished.style.borderBottom = "2px solid black";
+      this._all.style.borderBottom = "2px solid black";
+    } else if (this.isFinished) {
+      this._unfinished.style.borderBottom = "2px solid black";
+      this._finished.style.borderBottom = "none";
+      this._all.style.borderBottom = "2px solid black";
+    } else if (this.isAll) {
+      this._unfinished.style.borderBottom = "2px solid black";
+      this._finished.style.borderBottom = "2px solid black";
+      this._all.style.borderBottom = "none";
+    }
 
     // set tabs style
     this._unfinished.className = "tab";

@@ -19,7 +19,7 @@ export class Table {
 
   get list() {
     return this._list;
-  }Í
+  }
 
   render(anchor) {
     // set table style

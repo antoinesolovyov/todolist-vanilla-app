@@ -15,11 +15,15 @@ export class Item {
     return this._id;
   }
 
+  get checkbox() {
+    return this._checkbox;
+  }
+
   get task() {
     return this._task;
   }
 
-  get delete() {Í
+  get delete() {
     return this._delete;
   }
 
@@ -40,11 +44,11 @@ export class Item {
     this._item.innerText = task;
   }
 
-  set isFinished(flag) {
-    this._isFinished = flag;
-  }
-
   get isFinished() {
     return this._isFinished;
+  }
+
+  set isFinished(flag) {
+    this._isFinished = flag;
   }
 }

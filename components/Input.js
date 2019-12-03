@@ -3,7 +3,6 @@ export class Input {
     // create elements
     this._form = document.createElement("form");
     this._input = document.createElement("input");
-    this._input.placeholder = "What needs to be done?";
     this._button = document.createElement("button");
   }
 
@@ -16,6 +15,8 @@ export class Input {
   }
 
   render(anchor) {
+    this._input.placeholder = "What needs to be done?";
+    
     // append
     this._form.append(this._input, this._button);
     anchor.append(this._form);
