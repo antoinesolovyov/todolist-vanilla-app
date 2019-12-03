@@ -7,6 +7,12 @@ export class List {
     this._finishedCount = 0;
   }
 
+  addItem(item) {
+    this._items[item.id] = item;
+    this._count++;
+    this._unfinishedCount++;
+  }
+
   get items() {
     return this._items;
   }

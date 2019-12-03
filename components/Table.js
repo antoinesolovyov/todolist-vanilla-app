@@ -2,11 +2,14 @@ import { Bar } from "./Bar.js";
 import { List } from "./List.js";
 
 export class Table {
-  constructor() {
+  constructor(anchor) {
     this._table = document.createElement("div");
+    this._table.style.border = "2px solid black";
 
     this._bar = new Bar();
     this._list = new List();
+
+    this._anchor = anchor;
   }
 
   get table() {
@@ -21,11 +24,7 @@ export class Table {
     return this._list;
   }
 
-  render(anchor) {
-    // set table style
-    this._table.style.border = "2px solid black";
-
-    // append
+  render() {
     if (this._bar.isUnfinished) {
       this._table.append(this._bar.bar, this._list.unfinishedList);
     } else if (this._bar.isFinished) {
@@ -33,6 +32,7 @@ export class Table {
     } else {
       this._table.append(this._bar.bar, this._list.allList);
     }
-    anchor.append(this._table);
+
+    this._anchor.append(this._table);
   }
 }

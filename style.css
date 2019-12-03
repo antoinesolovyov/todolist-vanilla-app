@@ -63,7 +63,7 @@ td {
 .tab {
   width: 160px;
   text-align: center;
-  border-bottom: none;
+  border-right: 2px solid black;
 }
 
 .checkbox {

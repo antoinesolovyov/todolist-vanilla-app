@@ -1,24 +1,25 @@
 export class Input {
-  constructor() {
-    // create elements
+  constructor(anchor) {
     this._form = document.createElement("form");
     this._input = document.createElement("input");
     this._button = document.createElement("button");
+    this._anchor = anchor;
+
+    this._input.placeholder = "What needs to be done?";
+
+    this._form.append(this._input, this._button);
+    this._anchor.append(this._form);
   }
 
   get button() {
     return this._button;
   }
 
-  get input() {
-    return this._input;
+  get value() {
+    return this._input.value;
   }
 
-  render(anchor) {
-    this._input.placeholder = "What needs to be done?";
-    
-    // append
-    this._form.append(this._input, this._button);
-    anchor.append(this._form);
+  set value(value) {
+    this._input.value = value;
   }
 }

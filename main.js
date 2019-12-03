@@ -8,61 +8,62 @@ import { Item } from "./components/Item.js";
 
 const anchor = document.body;
 
-const headerEl = document.createElement("header");
-const articleEl = document.createElement("article");
-const footerEl = document.createElement("footer");
+const headerElement = document.createElement("header");
+const articleElement = document.createElement("article");
+const footerElement = document.createElement("footer");
 
-anchor.append(headerEl, articleEl, footerEl);
+anchor.append(headerElement, articleElement, footerElement);
 
-const header = new Header(headerEl);
-const footer = new Footer(footerEl);
+new Header(headerElement);
+new Footer(footerElement);
 
-const input = new Input();
-const table = new Table();
+const input = new Input(articleElement);
+const table = new Table(articleElement);
 
-render();
+table.render();
+
+const bar = table.bar;
+const list = table.list;
 
 // unfinished tab click event
-table.bar.unfinished.addEventListener("click", () => {
-  table.bar.isUnfinished = true;
-  table.bar.isFinished = false;
-  table.bar.isAll = false;
+bar.unfinished.addEventListener("click", () => {
+  bar.isUnfinished = true;
+  bar.isFinished = false;
+  bar.isAll = false;
 
-  render();
+  table.render();
 });
 
 // finished tab click event
-table.bar.finished.addEventListener("click", () => {
-  table.bar.isUnfinished = false;
-  table.bar.isFinished = true;
-  table.bar.isAll = false;
+bar.finished.addEventListener("click", () => {
+  bar.isUnfinished = false;
+  bar.isFinished = true;
+  bar.isAll = false;
 
-  render();
+  table.render();
 });
 
 // all tab click event
-table.bar.all.addEventListener("click", () => {
-  table.bar.isUnfinished = false;
-  table.bar.isFinished = false;
-  table.bar.isAll = true;
+bar.all.addEventListener("click", () => {
+  bar.isUnfinished = false;
+  bar.isFinished = false;
+  bar.isAll = true;
 
-  render();
+  table.render();
 });
 
 // input button onclick
 input.button.onclick = () => {
-  if (input.input.value) {
-    const item = new Item(input.input.value);
+  if (input.value) {
+    const item = new Item(input.value);
 
-    input.input.value = "";
+    input.value = "";
 
-    table.list.items[item.id] = item;
-    table.list.count++;
-    table.list.unfinishedCount++;
+    list.addItem(item);
 
-    table.bar.unfinishedCount = table.list.unfinishedCount;
-    table.bar.finishedCount = table.list.finishedCount;
-    table.bar.allCount = table.list.count;
+    bar.unfinishedTabText = list.unfinishedCount;
+    bar.finishedTabText = list.finishedCount;
+    bar.allTabText = list.count;
 
     // checkbox click event
     item.checkbox.addEventListener("click", () => {
@@ -70,50 +71,43 @@ input.button.onclick = () => {
         item.task.style.textDecoration = "none";
         item.checkbox.style.backgroundImage = "url('icons/square-icon.svg')";
         item.isFinished = false;
-        table.list.unfinishedCount++;
-        table.list.finishedCount--;
-        table.bar.unfinishedCount = table.list.unfinishedCount;
-        table.bar.finishedCount = table.list.finishedCount;
+        list.unfinishedCount++;
+        list.finishedCount--;
+        bar.unfinishedTabText = list.unfinishedCount;
+        bar.finishedTabText = list.finishedCount;
       } else {
         item.task.style.textDecoration = "line-through";
         item.checkbox.style.backgroundImage =
           "url('icons/check-square-icon.svg')";
         item.isFinished = true;
-        table.list.unfinishedCount--;
-        table.list.finishedCount++;
-        table.bar.unfinishedCount = table.list.unfinishedCount;
-        table.bar.finishedCount = table.list.finishedCount;
+        list.unfinishedCount--;
+        list.finishedCount++;
+        bar.unfinishedTabText = list.unfinishedCount;
+        bar.finishedTabText = list.finishedCount;
       }
 
-      render();
+      table.render();
     });
 
     // delete click event
     item.delete.addEventListener("click", () => {
       if (item.isFinished) {
-        table.list.finishedCount--;
-        table.bar.finishedCount = table.list.finishedCount;
+        list.finishedCount--;
+        bar.finishedTabText = list.finishedCount;
       } else {
-        table.list.unfinishedCount--;
-        table.bar.unfinishedCount = table.list.unfinishedCount;
+        list.unfinishedCount--;
+        bar.unfinishedTabText = list.unfinishedCount;
       }
 
-      delete table.list.items[item.id];
-      table.list.count--;
-      table.bar.allCount = table.list.count;
+      delete list.items[item.id];
+      list.count--;
+      bar.allTabText = list.count;
 
-      render();
+      table.render();
     });
 
-    render();
+    table.render();
   }
 
   return false;
 };
-
-function render() {
-  header.render();
-  input.render(articleEl);
-  table.render(articleEl);
-  footer.render();
-}
