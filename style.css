@@ -33,15 +33,16 @@ input {
   height: 48px;
   border: none;
   outline: none;
+  font-family: "Roboto Condensed";
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   padding: 0px 0px 0px 12px;
 }
 
 input::placeholder {
-  font-family: "Roboto";
+  font-family: "Roboto Condensed";
   color: grey;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 table {

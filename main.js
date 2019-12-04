@@ -1,10 +1,10 @@
-import { Header } from "./components/Header.js";
-import { Footer } from "./components/Footer.js";
+import { HeaderComponent } from "./components/HeaderComponent.js";
+import { FooterComponent } from "./components/FooterComponent.js";
 
-import { Input } from "./components/Input.js";
-import { Table } from "./components/Table.js";
+import { InputComponent } from "./components/InputComponent.js";
+import { TableComponent } from "./components/TableComponent.js";
 
-import { Item } from "./components/Item.js";
+import { ItemComponent } from "./components/ItemComponent.js";
 
 const anchor = document.body;
 
@@ -14,11 +14,13 @@ const footerElement = document.createElement("footer");
 
 anchor.append(headerElement, articleElement, footerElement);
 
-new Header(headerElement);
-new Footer(footerElement);
+const headerComponent = new HeaderComponent(headerElement);
+const footerComponent = new FooterComponent(footerElement);
+headerComponent.render();
+footerComponent.render();
 
-const input = new Input(articleElement);
-const table = new Table(articleElement);
+const input = new InputComponent(articleElement);
+const table = new TableComponent(articleElement);
 
 table.render();
 
@@ -54,10 +56,10 @@ bar.all.addEventListener("click", () => {
 
 // input button onclick
 input.button.onclick = () => {
-  if (input.value) {
-    const item = new Item(input.value);
+  if (input.input.value) {
+    const item = new ItemComponent(input.input.value);
 
-    input.value = "";
+    input.input.value = "";
 
     list.addItem(item);
 
