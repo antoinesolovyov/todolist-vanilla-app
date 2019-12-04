@@ -1,112 +1,119 @@
-import { Header } from "./components/Header.js";
-import { Footer } from "./components/Footer.js";
+import { HeaderComponent } from "./components/HeaderComponent.js";
+import { InputComponent }  from "./components/InputComponent.js";
+import { TableComponent }  from "./components/TableComponent.js";
+import { FooterComponent } from "./components/FooterComponent.js";
 
-import { Input } from "./components/Input.js";
-import { Table } from "./components/Table.js";
+import { ItemComponent } from "./components/ItemComponent.js";
 
-import { Item } from "./components/Item.js";
+const bodyAnchor = document.body;
 
-const anchor = document.body;
+const headerAnchor  = document.createElement("header");
+const articleAnchor = document.createElement("article");
+const footerAnchor  = document.createElement("footer");
 
-const headerElement = document.createElement("header");
-const articleElement = document.createElement("article");
-const footerElement = document.createElement("footer");
+bodyAnchor.append(headerAnchor, articleAnchor, footerAnchor);
 
-anchor.append(headerElement, articleElement, footerElement);
+const headerComponent = new HeaderComponent(headerAnchor);
+const inputComponent  = new InputComponent(articleAnchor);
+const tableComponent  = new TableComponent(articleAnchor);
+const footerComponent = new FooterComponent(footerAnchor);
 
-new Header(headerElement);
-new Footer(footerElement);
-
-const input = new Input(articleElement);
-const table = new Table(articleElement);
-
-table.render();
-
-const bar = table.bar;
-const list = table.list;
+headerComponent.render();
+inputComponent.render();
+tableComponent.render();
+footerComponent.render();
 
 // unfinished tab click event
-bar.unfinished.addEventListener("click", () => {
-  bar.isUnfinished = true;
-  bar.isFinished = false;
-  bar.isAll = false;
+tableComponent.bar.unfinished.addEventListener("click", () => {
+  tableComponent.bar.isUnfinished = true;
+  tableComponent.bar.isFinished = false;
+  tableComponent.bar.isAll = false;
 
-  table.render();
+  tableComponent.render();
 });
 
 // finished tab click event
-bar.finished.addEventListener("click", () => {
-  bar.isUnfinished = false;
-  bar.isFinished = true;
-  bar.isAll = false;
+tableComponent.bar.finished.addEventListener("click", () => {
+  tableComponent.bar.isUnfinished = false;
+  tableComponent.bar.isFinished = true;
+  tableComponent.bar.isAll = false;
 
-  table.render();
+  tableComponent.render();
 });
 
 // all tab click event
-bar.all.addEventListener("click", () => {
-  bar.isUnfinished = false;
-  bar.isFinished = false;
-  bar.isAll = true;
+tableComponent.bar.all.addEventListener("click", () => {
+  tableComponent.bar.isUnfinished = false;
+  tableComponent.bar.isFinished = false;
+  tableComponent.bar.isAll = true;
 
-  table.render();
+  tableComponent.render();
 });
 
 // input button onclick
-input.button.onclick = () => {
-  if (input.value) {
-    const item = new Item(input.value);
+inputComponent.button.onclick = () => {
 
-    input.value = "";
+  try {
+    
+    if (inputComponent.input.value) {
+      const itemComponent = new ItemComponent(inputComponent.input.value);
 
-    list.addItem(item);
+      inputComponent.input.value = "";
 
-    bar.unfinishedTabText = list.unfinishedCount;
-    bar.finishedTabText = list.finishedCount;
-    bar.allTabText = list.count;
+      tableComponent.list.items[itemComponent.id] = itemComponent;
+      tableComponent.list.count++;
+      tableComponent.list.unfinishedCount++;
 
-    // checkbox click event
-    item.checkbox.addEventListener("click", () => {
-      if (item.isFinished) {
-        item.task.style.textDecoration = "none";
-        item.checkbox.style.backgroundImage = "url('icons/square-icon.svg')";
-        item.isFinished = false;
-        list.unfinishedCount++;
-        list.finishedCount--;
-        bar.unfinishedTabText = list.unfinishedCount;
-        bar.finishedTabText = list.finishedCount;
-      } else {
-        item.task.style.textDecoration = "line-through";
-        item.checkbox.style.backgroundImage =
-          "url('icons/check-square-icon.svg')";
-        item.isFinished = true;
-        list.unfinishedCount--;
-        list.finishedCount++;
-        bar.unfinishedTabText = list.unfinishedCount;
-        bar.finishedTabText = list.finishedCount;
-      }
+      tableComponent.bar.unfinishedTabText = tableComponent.list.unfinishedCount;
+      tableComponent.bar.finishedTabText = tableComponent.list.finishedCount;
+      tableComponent.bar.allTabText = tableComponent.list.count;
 
-      table.render();
-    });
+      // checkbox click event
+      itemComponent.checkbox.addEventListener("click", () => {
+        if (itemComponent.isFinished) {
+          itemComponent.task.style.textDecoration = "none";
+          itemComponent.checkbox.style.backgroundImage = "url('icons/square-icon.svg')";
+          itemComponent.isFinished = false;
+          tableComponent.list.unfinishedCount++;
+          tableComponent.list.finishedCount--;
+          tableComponent.bar.unfinishedTabText = tableComponent.list.unfinishedCount;
+          tableComponent.bar.finishedTabText = tableComponent.list.finishedCount;
+        } else {
+          itemComponent.task.style.textDecoration = "line-through";
+          itemComponent.checkbox.style.backgroundImage =
+            "url('icons/check-square-icon.svg')";
+          itemComponent.isFinished = true;
+          tableComponent.list.unfinishedCount--;
+          tableComponent.list.finishedCount++;
+          tableComponent.bar.unfinishedTabText = tableComponent.list.unfinishedCount;
+          tableComponent.bar.finishedTabText = tableComponent.list.finishedCount;
+        }
 
-    // delete click event
-    item.delete.addEventListener("click", () => {
-      if (item.isFinished) {
-        list.finishedCount--;
-        bar.finishedTabText = list.finishedCount;
-      } else {
-        list.unfinishedCount--;
-        bar.unfinishedTabText = list.unfinishedCount;
-      }
+        tableComponent.render();
+      });
 
-      delete list.items[item.id];
-      list.count--;
-      bar.allTabText = list.count;
+      // delete click event
+      itemComponent.delete.addEventListener("click", () => {
+        if (itemComponent.isFinished) {
+          tableComponent.list.finishedCount--;
+          tableComponent.bar.finishedTabText = tableComponent.list.finishedCount;
+        } else {
+          tableComponent.list.unfinishedCount--;
+          tableComponent.bar.unfinishedTabText = tableComponent.list.unfinishedCount;
+        }
 
-      table.render();
-    });
+        delete tableComponent.list.items[itemComponent.id];
+        tableComponent.list.count--;
+        tableComponent.bar.allTabText = tableComponent.list.count;
 
-    table.render();
+        tableComponent.render();
+      });
+
+      tableComponent.render();
+    }
+
+  } catch(ex) {
+    console.log(ex);
   }
 
   return false;
