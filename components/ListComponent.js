@@ -1,10 +1,17 @@
+import { ItemComponent } from "./ItemComponent.js";
+
 export class ListComponent {
   constructor(anchor) {
     this.list = document.createElement("table");
     this.items = {};
-    this.count = 0;
-    this.unfinishedCount = 0;
-    this.finishedCount = 0;
+
+    let keys = Object.keys(localStorage);
+
+    for(let key of keys) {
+        let item = JSON.parse(localStorage.getItem(key));
+        console.log(item);
+        this.items[key] = new ItemComponent(item);
+    }
 
     this.anchor = anchor;
   }

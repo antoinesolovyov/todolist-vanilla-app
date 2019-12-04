@@ -1,7 +1,9 @@
 export class Item {
-    constructor(task) {
-        this.id = new Date();
+    constructor(id, task, isFinished) {
+        this.id = id;
         this.task = task;
-        this.isFinished = false;
+        this.isFinished = isFinished;
+        this.textDecoration = "none";
+        this.backgroundImage = "url('icons/square-icon.svg')";
     }
 }

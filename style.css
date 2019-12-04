@@ -79,9 +79,8 @@ td {
 }
 
 .delete {
-  background-image: url(icons/x-icon.svg);
+  background-image: none;
   background-size: 24px 24px;
   background-repeat: no-repeat;
   background-position: center;
 }
-
