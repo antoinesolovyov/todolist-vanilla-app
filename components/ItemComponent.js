@@ -1,17 +1,19 @@
 export class ItemComponent {
-  constructor(task) {
+  constructor(item) {
     this.checkbox = document.createElement("td");
     this.checkbox.className = "checkbox";
+    this.checkbox.style.backgroundImage = item.backgroundImage;
     this.task = document.createElement("td");
-    this.task.innerText = task;
+    this.task.innerText = item.task;
     this.task.className = "task";
+    this.task.style.textDecoration = item.textDecoration;
     this.delete = document.createElement("td");
     this.delete.className = "delete";
 
     this.item = document.createElement("tr");
     this.item.append(this.checkbox, this.task, this.delete);
 
-    this.id = Date.now();
-    this.isFinished = false;
+    this.id = item.id;
+    this.isFinished = item.isFinished;
   }
 }
