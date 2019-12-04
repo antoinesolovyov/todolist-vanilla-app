@@ -15,7 +15,6 @@ export class ItemComponent {
 
     this.checkbox.addEventListener("click", () => {
       if (this.isFinished) {
-        
         itemObject.textDecoration = "none";
         itemObject.backgroundImage = "url('icons/square-icon.svg')";
         itemObject.isFinished = false;
@@ -38,16 +37,11 @@ export class ItemComponent {
       this.delete.style.backgroundImage = "url('icons/x-icon.svg')";
     });
 
-    // delete click event
     this.delete.addEventListener("click", () => {
       localStorage.removeItem(itemObject.id);
     });
 
     this.id = itemObject.id;
     this.isFinished = itemObject.isFinished;
-  }
-
-  render() {
-    
   }
 }

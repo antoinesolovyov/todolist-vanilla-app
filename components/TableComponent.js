@@ -1,4 +1,4 @@
-import { BarComponent }  from "./BarComponent.js";
+import { BarComponent } from "./BarComponent.js";
 import { ListComponent } from "./ListComponent.js";
 
 export class TableComponent {
@@ -6,8 +6,13 @@ export class TableComponent {
     this.table = document.createElement("div");
     this.table.style.border = "2px solid black";
 
-    this.bar  = new BarComponent(this.table);
-    this.list = new ListComponent(this.table);
+    this.barAnchor = document.createElement("div");
+    this.listAnchor = document.createElement("div");
+
+    this.table.append(this.barAnchor, this.listAnchor);
+
+    this.bar = new BarComponent(this.barAnchor);
+    this.list = new ListComponent(this.listAnchor);
 
     this.anchor = anchor;
   }

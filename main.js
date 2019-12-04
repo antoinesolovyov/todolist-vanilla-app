@@ -1,6 +1,6 @@
 import { HeaderComponent } from "./components/HeaderComponent.js";
-import { InputComponent }  from "./components/InputComponent.js";
-import { TableComponent }  from "./components/TableComponent.js";
+import { InputComponent } from "./components/InputComponent.js";
+import { TableComponent } from "./components/TableComponent.js";
 import { FooterComponent } from "./components/FooterComponent.js";
 
 import { ItemComponent } from "./components/ItemComponent.js";
@@ -12,15 +12,15 @@ const listObject = new List();
 
 const bodyAnchor = document.body;
 
-const headerAnchor  = document.createElement("header");
+const headerAnchor = document.createElement("header");
 const articleAnchor = document.createElement("article");
-const footerAnchor  = document.createElement("footer");
+const footerAnchor = document.createElement("footer");
 
 bodyAnchor.append(headerAnchor, articleAnchor, footerAnchor);
 
 const headerComponent = new HeaderComponent(headerAnchor);
-const inputComponent  = new InputComponent(articleAnchor);
-const tableComponent  = new TableComponent(articleAnchor);
+const inputComponent = new InputComponent(articleAnchor);
+const tableComponent = new TableComponent(articleAnchor);
 const footerComponent = new FooterComponent(footerAnchor);
 
 headerComponent.render();
@@ -31,9 +31,12 @@ footerComponent.render();
 // input button onclick
 inputComponent.button.onclick = () => {
   try {
-    
     if (inputComponent.input.value) {
-      const itemObject = new Item(Date.now(), inputComponent.input.value, false);
+      const itemObject = new Item(
+        Date.now(),
+        inputComponent.input.value,
+        false
+      );
       const itemComponent = new ItemComponent(itemObject);
 
       inputComponent.input.value = "";
@@ -46,8 +49,7 @@ inputComponent.button.onclick = () => {
 
       tableComponent.render();
     }
-
-  } catch(ex) {
+  } catch (ex) {
     console.log(ex);
   }
 

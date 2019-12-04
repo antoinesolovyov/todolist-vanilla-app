@@ -7,16 +7,17 @@ export class ListComponent {
 
     let keys = Object.keys(localStorage);
 
-    for(let key of keys) {
-        let item = JSON.parse(localStorage.getItem(key));
-        console.log(item);
-        this.items[key] = new ItemComponent(item);
+    for (let key of keys) {
+      let item = JSON.parse(localStorage.getItem(key));
+      console.log(item);
+      this.items[key] = new ItemComponent(item);
     }
 
     this.anchor = anchor;
   }
-  
-  render(flag) {
+
+  render() {
+    let flag = 3;
 
     this.list.innerHTML = "";
 
