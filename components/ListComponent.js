@@ -7,13 +7,6 @@ export class ListComponent {
     this.finishedCount = 0;
   }
 
-  addItem(item) {
-    this.items[item.id] = item;
-    this.count++;
-    if (!item.isFinished) this.unfinishedCount++;
-    else this.finishedCount++;
-  }
-
   get finishedList() {
     this.list.innerHTML = "";
 

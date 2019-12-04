@@ -19,13 +19,22 @@ const footerComponent = new FooterComponent(footerAnchor);
 const inputComponent = new InputComponent(articleAnchor);
 const tableComponent = new TableComponent(articleAnchor);
 
+headerComponent.render();
+footerComponent.render();
+inputComponent.render();
+tableComponent.render();
+
+// load items from local storage
 const keys = Object.keys(localStorage);
 
 for (let key of keys) {
 	const itemObject = JSON.parse(localStorage.getItem(key));
 	const itemComponent = new ItemComponent(itemObject);
 
-	tableComponent.list.addItem(itemComponent);
+	tableComponent.list.items[itemComponent.id] = itemComponent;
+    tableComponent.list.count++;
+    if (!itemComponent.isFinished) tableComponent.list.unfinishedCount++;
+    else tableComponent.list.finishedCount++;
 
 	tableComponent.bar.unfinishedTabText =
 		tableComponent.list.unfinishedCount;
@@ -94,11 +103,6 @@ for (let key of keys) {
 	tableComponent.render();
 }
 
-headerComponent.render();
-footerComponent.render();
-inputComponent.render();
-tableComponent.render();
-
 // unfinished tab click event
 tableComponent.bar.unfinished.addEventListener("click", () => {
     tableComponent.bar.isUnfinished = true;
@@ -137,7 +141,11 @@ inputComponent.button.onclick = () => {
 
 			inputComponent.input.value = "";
 
-			tableComponent.list.addItem(itemComponent);
+			tableComponent.list.items[itemComponent.id] = itemComponent;
+			tableComponent.list.count++;
+			if (!itemComponent.isFinished) tableComponent.list.unfinishedCount++;
+			else tableComponent.list.finishedCount++;
+	
 			localStorage.setItem(itemObject.id, JSON.stringify(itemObject));
 
 			tableComponent.bar.unfinishedTabText =
