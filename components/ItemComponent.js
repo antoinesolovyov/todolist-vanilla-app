@@ -16,4 +16,10 @@ export class ItemComponent {
     this.id = item.id;
     this.isFinished = item.isFinished;
   }
+
+  setItemComponent(itemObject) {
+    this.task.style.textDecoration = itemObject.textDecoration;
+	this.checkbox.style.backgroundImage = itemObject.backgroundImage;
+	this.isFinished = itemObject.isFinished;
+  }
 }

@@ -35,9 +35,7 @@ for (let key of keys) {
     if (!itemComponent.isFinished) tableComponent.list.unfinishedCount++;
     else tableComponent.list.finishedCount++;
 
-    tableComponent.bar.unfinishedTabText = tableComponent.list.unfinishedCount;
-    tableComponent.bar.finishedTabText = tableComponent.list.finishedCount;
-    tableComponent.bar.allTabText = tableComponent.list.count;
+    tableComponent.bar.setTabsText(tableComponent.list);
 
     // checkbox click event
     itemComponent.checkbox.addEventListener("click", () => {
@@ -70,9 +68,7 @@ inputComponent.button.onclick = () => {
 
             localStorage.setItem(itemObject.id, JSON.stringify(itemObject));
 
-            tableComponent.bar.unfinishedTabText = tableComponent.list.unfinishedCount;
-            tableComponent.bar.finishedTabText = tableComponent.list.finishedCount;
-            tableComponent.bar.allTabText = tableComponent.list.count;
+            tableComponent.bar.setTabsText(tableComponent.list);
 
             // checkbox click event
 			itemComponent.checkbox.addEventListener("click", () => {
@@ -123,34 +119,28 @@ tableComponent.bar.all.addEventListener("click", () => {
 // checkbox handler
 function checkboxHandler(itemObject, itemComponent) {
 	if (itemComponent.isFinished) {
-		itemComponent.task.style.textDecoration = "none";
-		itemComponent.checkbox.style.backgroundImage = "url('icons/square-icon.svg')";
-		itemComponent.isFinished = false;
 		tableComponent.list.unfinishedCount++;
 		tableComponent.list.finishedCount--;
-		tableComponent.bar.unfinishedTabText = tableComponent.list.unfinishedCount;
-		tableComponent.bar.finishedTabText = tableComponent.list.finishedCount;
 
 		itemObject.isFinished = false;
 		itemObject.textDecoration = "none";
 		itemObject.backgroundImage = "url('icons/square-icon.svg')";
+
+		itemComponent.setItemComponent(itemObject)
 	} else {
-		itemComponent.task.style.textDecoration = "line-through";
-		itemComponent.checkbox.style.backgroundImage = "url('icons/check-square-icon.svg')";
-		itemComponent.isFinished = true;
 		tableComponent.list.unfinishedCount--;
 		tableComponent.list.finishedCount++;
-		tableComponent.bar.unfinishedTabText = tableComponent.list.unfinishedCount;
-		tableComponent.bar.finishedTabText = tableComponent.list.finishedCount;
 
 		itemObject.isFinished = true;
 		itemObject.textDecoration = "line-through";
-		itemObject.backgroundImage =
-			"url('icons/check-square-icon.svg')";
+		itemObject.backgroundImage = "url('icons/check-square-icon.svg')";
+
+		itemComponent.setItemComponent(itemObject)
 	}
 
 	localStorage.setItem(itemObject.id, JSON.stringify(itemObject));
 
+	tableComponent.bar.setTabsText(tableComponent.list);
     tableComponent.render();
 }
 
@@ -158,16 +148,15 @@ function checkboxHandler(itemObject, itemComponent) {
 function deleteHandler(itemObject, itemComponent) {
 	if (itemComponent.isFinished) {
 		tableComponent.list.finishedCount--;
-		tableComponent.bar.finishedTabText = tableComponent.list.finishedCount;
 	} else {
 		tableComponent.list.unfinishedCount--;
-		tableComponent.bar.unfinishedTabText = tableComponent.list.unfinishedCount;
 	}
+
+	tableComponent.list.count--;
 
 	localStorage.removeItem(itemObject.id);
 	delete tableComponent.list.items[itemComponent.id];
-	tableComponent.list.count--;
-	tableComponent.bar.allTabText = tableComponent.list.count;
-
+	
+	tableComponent.bar.setTabsText(tableComponent.list);
 	tableComponent.render();
 }

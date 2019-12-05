@@ -23,16 +23,10 @@ export class BarComponent {
     this.anchor = anchor;
   }
 
-  set unfinishedTabText(count) {
-    this.unfinished.innerText = `Unfinished [ ${count} ]`;
-  }
-
-  set finishedTabText(count) {
-    this.finished.innerText = `Finished [ ${count} ]`;
-  }
-
-  set allTabText(count) {
-    this.all.innerText = `All [ ${count} ]`;
+  setTabsText(list) {
+    this.unfinished.innerText = `Unfinished [ ${list.unfinishedCount} ]`;
+    this.finished.innerText = `Finished [ ${list.finishedCount} ]`;
+    this.all.innerText = `All [ ${list.count} ]`;
   }
 
   render() {
