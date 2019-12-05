@@ -29,12 +29,7 @@ for (let key of keys) {
     const itemObject = JSON.parse(localStorage.getItem(key));
     const itemComponent = new ItemComponent(itemObject);
 
-    tableComponent.list.items[itemComponent.id] = itemComponent;
-	tableComponent.list.count++;
-	
-    if (!itemComponent.isFinished) tableComponent.list.unfinishedCount++;
-    else tableComponent.list.finishedCount++;
-
+    tableComponent.list.addItemComponent(itemComponent);
     tableComponent.bar.setTabsText(tableComponent.list);
 
     // checkbox click event
@@ -54,21 +49,15 @@ for (let key of keys) {
 inputComponent.button.onclick = () => {
     try {
         if (inputComponent.input.value) {
-            const itemObject = new ItemObject(Date.now(), inputComponent.input.value, false
-            );
+            const itemObject = new ItemObject(Date.now(), inputComponent.input.value, false);
             const itemComponent = new ItemComponent(itemObject);
 
             inputComponent.input.value = "";
 
-            tableComponent.list.items[itemComponent.id] = itemComponent;
-			tableComponent.list.count++;
-			
-            if (!itemComponent.isFinished) tableComponent.list.unfinishedCount++;
-            else tableComponent.list.finishedCount++;
+            tableComponent.list.addItemComponent(itemComponent);
+			tableComponent.bar.setTabsText(tableComponent.list);
 
             localStorage.setItem(itemObject.id, JSON.stringify(itemObject));
-
-            tableComponent.bar.setTabsText(tableComponent.list);
 
             // checkbox click event
 			itemComponent.checkbox.addEventListener("click", () => {
