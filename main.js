@@ -12,8 +12,6 @@ const footerAnchor = document.createElement("footer");
 
 document.body.append(headerAnchor, articleAnchor, footerAnchor);
 
-console.log(localStorage);
-
 const headerComponent = new HeaderComponent(headerAnchor);
 const footerComponent = new FooterComponent(footerAnchor);
 const inputComponent = new InputComponent(articleAnchor);
@@ -105,9 +103,9 @@ for (let key of keys) {
 
 // unfinished tab click event
 tableComponent.bar.unfinished.addEventListener("click", () => {
-    tableComponent.bar.isUnfinished = true;
-    tableComponent.bar.isFinished = false;
-    tableComponent.bar.isAll = false;
+	tableComponent.bar.isUnfinished = true;
+	tableComponent.bar.isFinished = false;
+	tableComponent.bar.isAll = false;
 
     tableComponent.render();
 });

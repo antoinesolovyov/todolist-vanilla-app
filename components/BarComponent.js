@@ -1,6 +1,6 @@
 export class BarComponent {
-  constructor() {
-    this._bar = document.createElement("table");
+  constructor(anchor) {
+    this.bar = document.createElement("table");
     this.tabList = document.createElement("tr");
     this.unfinished = document.createElement("td");
     this.unfinished.innerText = "Unfinished [ 0 ]";
@@ -18,7 +18,9 @@ export class BarComponent {
     this.isAll = false;
 
     this.tabList.append(this.unfinished, this.finished, this.all);
-    this._bar.append(this.tabList);
+    this.bar.append(this.tabList);
+
+    this.anchor = anchor;
   }
 
   set unfinishedTabText(count) {
@@ -33,7 +35,7 @@ export class BarComponent {
     this.all.innerText = `All [ ${count} ]`;
   }
 
-  get bar() {
+  render() {
     const borderBottom = "2px solid black";
 
     if (this.isUnfinished) {
@@ -50,6 +52,6 @@ export class BarComponent {
       this.all.style.borderBottom = "none";
     }
 
-    return this._bar;
+    this.anchor.append(this.bar);
   }
 }
