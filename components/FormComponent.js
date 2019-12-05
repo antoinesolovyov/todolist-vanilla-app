@@ -1,12 +1,9 @@
 export class Form {
-
     constructor() {
         this.login = "";
         this.password = "";
 
         this.form = document.createElement("form");
-
-        
     }
 
     onSubmit() {
@@ -14,10 +11,10 @@ export class Form {
         logpas.login = this.loginElement.value;
         logpas.password = this.passwordElement.value;
 
-        let response = fetch('', {
-            method: 'POST',
+        let response = fetch("", {
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json;charset=utf-8'
+                "Content-Type": "application/json;charset=utf-8"
             },
             body: JSON.stringify(logpas)
         });
@@ -33,7 +30,6 @@ export class Form {
     }
 
     render(anchor) {
-
         this.loginElement = document.createElement("input");
         this.passwordElement = document.createElement("input");
 
@@ -42,15 +38,21 @@ export class Form {
         this.signInElement = document.createElement("button");
         this.signUpElement = document.createElement("button");
 
-        this.form.append(this.loginElement, this.passwordElement, this.signInElement, this.separatorElement, this.signUpElement)
+        this.form.append(
+            this.loginElement,
+            this.passwordElement,
+            this.signInElement,
+            this.separatorElement,
+            this.signUpElement
+        );
 
         this.signInElement.innerText = "submit";
 
         this.form.onsubmit = this.onSubmit.bind(this);
-        
+
         let counter = 0;
 
-/*
+        /*
         this.form.addEventListener("submit", () => {
             
             console.log("!");
@@ -78,8 +80,6 @@ const loginInput = document.createElement("input");
 const passwordInput = document.createElement("input");
 
 //loginInput.attachShadow({mode: "open"});
-
-
 
 loginInput.placeholder = "Login";
 loginInput.type = "text";
@@ -165,7 +165,6 @@ function setButtonStyles(buttonStyle, backgroundColor, color) {
 // ONSUBMIT FUNCTION
 
 function onSubmit() {
-
     let flag = true;
 
     if (loginInput.value === "") {

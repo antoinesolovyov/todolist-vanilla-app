@@ -1,51 +1,51 @@
 export class ListComponent {
-  constructor() {
-    this.list = document.createElement("table");
-    this.items = {};
-    this.count = 0;
-    this.unfinishedCount = 0;
-    this.finishedCount = 0;
-  }
-
-  addItemComponent(itemComponent) {
-    this.items[itemComponent.id] = itemComponent;
-    this.count++;
-    
-    if (!itemComponent.isFinished) this.unfinishedCount++;
-    else this.finishedCount++;
-  }
-
-  get finishedList() {
-    this.list.innerHTML = "";
-
-    for (let key in this.items) {
-      if (this.items[key].isFinished) {
-        this.list.append(this.items[key].item);
-      }
+    constructor() {
+        this.list = document.createElement("table");
+        this.items = {};
+        this.count = 0;
+        this.unfinishedCount = 0;
+        this.finishedCount = 0;
     }
 
-    return this.list;
-  }
+    addItemComponent(itemComponent) {
+        this.items[itemComponent.id] = itemComponent;
+        this.count++;
 
-  get unfinishedList() {
-    this.list.innerHTML = "";
-
-    for (let key in this.items) {
-      if (!this.items[key].isFinished) {
-        this.list.append(this.items[key].item);
-      }
+        if (!itemComponent.isFinished) this.unfinishedCount++;
+        else this.finishedCount++;
     }
 
-    return this.list;
-  }
+    get finishedList() {
+        this.list.innerHTML = "";
 
-  get allList() {
-    this.list.innerHTML = "";
+        for (const key in this.items) {
+            if (this.items[key].isFinished) {
+                this.list.append(this.items[key].item);
+            }
+        }
 
-    for (let key in this.items) {
-      this.list.append(this.items[key].item);
+        return this.list;
     }
 
-    return this.list;
-  }
+    get unfinishedList() {
+        this.list.innerHTML = "";
+
+        for (const key in this.items) {
+            if (!this.items[key].isFinished) {
+                this.list.append(this.items[key].item);
+            }
+        }
+
+        return this.list;
+    }
+
+    get allList() {
+        this.list.innerHTML = "";
+
+        for (const key in this.items) {
+            this.list.append(this.items[key].item);
+        }
+
+        return this.list;
+    }
 }

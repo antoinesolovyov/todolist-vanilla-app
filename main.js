@@ -25,7 +25,7 @@ tableComponent.render();
 // load items from local storage
 const keys = Object.keys(localStorage);
 
-for (let key of keys) {
+for (const key of keys) {
     const itemObject = JSON.parse(localStorage.getItem(key));
     const itemComponent = new ItemComponent(itemObject);
 
@@ -41,13 +41,17 @@ for (let key of keys) {
 inputComponent.button.onclick = () => {
     try {
         if (inputComponent.input.value) {
-            const itemObject = new ItemObject(Date.now(), inputComponent.input.value, false);
+            const itemObject = new ItemObject(
+                Date.now(),
+                inputComponent.input.value,
+                false
+            );
             const itemComponent = new ItemComponent(itemObject);
 
             inputComponent.input.value = "";
 
             tableComponent.list.addItemComponent(itemComponent);
-			tableComponent.bar.setTabsText(tableComponent.list);
+            tableComponent.bar.setTabsText(tableComponent.list);
 
             localStorage.setItem(itemObject.id, JSON.stringify(itemObject));
 
@@ -90,68 +94,65 @@ tableComponent.bar.all.addEventListener("click", () => {
 });
 
 function addEventListeners(itemObject, itemComponent) {
-	// checkbox click event
-	itemComponent.checkbox.addEventListener("click", () => {
-		checkboxHandler(itemObject, itemComponent)
-	});
+    // checkbox click event
+    itemComponent.checkbox.addEventListener("click", () => {
+        checkboxHandler(itemObject, itemComponent);
+    });
 
-	// mouse enter event
-	itemComponent.item.addEventListener("mouseenter", () => {
-		itemComponent.delete.style.backgroundImage = "url('icons/x-icon.svg')";
-	});
+    // mouse enter event
+    itemComponent.item.addEventListener("mouseenter", () => {
+        itemComponent.delete.style.backgroundImage = "url('icons/x-icon.svg')";
+    });
 
-	// mouse leave event
-	itemComponent.item.addEventListener("mouseleave", () => {
-		itemComponent.delete.style.backgroundImage = "none";
-	});
+    // mouse leave event
+    itemComponent.item.addEventListener("mouseleave", () => {
+        itemComponent.delete.style.backgroundImage = "none";
+    });
 
-	// delete click event
-	itemComponent.delete.addEventListener("click", () => {
-		deleteHandler(itemObject, itemComponent)
-	});
+    // delete click event
+    itemComponent.delete.addEventListener("click", () => {
+        deleteHandler(itemObject, itemComponent);
+    });
 }
 
 // checkbox handler
 function checkboxHandler(itemObject, itemComponent) {
-	if (itemComponent.isFinished) {
-		tableComponent.list.unfinishedCount++;
-		tableComponent.list.finishedCount--;
+    if (itemComponent.isFinished) {
+        tableComponent.list.unfinishedCount++;
+        tableComponent.list.finishedCount--;
 
-		itemObject.isFinished = false;
-		itemObject.textDecoration = "none";
-		itemObject.backgroundImage = "url('icons/square-icon.svg')";
+        itemObject.isFinished = false;
+        itemObject.textDecoration = "none";
+        itemObject.backgroundImage = "url('icons/square-icon.svg')";
 
-		itemComponent.setItemComponent(itemObject)
-	} else {
-		tableComponent.list.unfinishedCount--;
-		tableComponent.list.finishedCount++;
+        itemComponent.setItemComponent(itemObject);
+    } else {
+        tableComponent.list.unfinishedCount--;
+        tableComponent.list.finishedCount++;
 
-		itemObject.isFinished = true;
-		itemObject.textDecoration = "line-through";
-		itemObject.backgroundImage = "url('icons/check-square-icon.svg')";
+        itemObject.isFinished = true;
+        itemObject.textDecoration = "line-through";
+        itemObject.backgroundImage = "url('icons/check-square-icon.svg')";
 
-		itemComponent.setItemComponent(itemObject)
-	}
+        itemComponent.setItemComponent(itemObject);
+    }
 
-	localStorage.setItem(itemObject.id, JSON.stringify(itemObject));
+    localStorage.setItem(itemObject.id, JSON.stringify(itemObject));
 
-	tableComponent.bar.setTabsText(tableComponent.list);
+    tableComponent.bar.setTabsText(tableComponent.list);
     tableComponent.render();
 }
 
 // delete handler
 function deleteHandler(itemObject, itemComponent) {
-	if (itemComponent.isFinished) {
-		tableComponent.list.finishedCount--;
-	} else {
-		tableComponent.list.unfinishedCount--;
-	}
+    tableComponent.list.count--;
+    itemComponent.isFinished
+        ? tableComponent.list.finishedCount--
+        : tableComponent.list.unfinishedCount--;
 
-	tableComponent.list.count--;
+    localStorage.removeItem(itemObject.id);
+    delete tableComponent.list.items[itemComponent.id];
 
-	localStorage.removeItem(itemObject.id);
-	delete tableComponent.list.items[itemComponent.id];
-	
-	tableComponent.bar.setTabsText(tableComponent.list);
-	tableComponent.render();
+    tableComponent.bar.setTabsText(tableComponent.list);
+    tableComponent.render();
 }
