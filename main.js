@@ -24,10 +24,8 @@ const formComponent = new FormComponent(articleAnchor);
 headerComponent.render();
 formComponent.render();
 footerComponent.render();
-//inputComponent.render();
-//tableComponent.render();
-
-/*
+inputComponent.render();
+tableComponent.render();
 
 try {
 
@@ -165,5 +163,3 @@ function deleteHandler(itemObject, itemComponent) {
 } catch(ex) {
 	console.log(ex);
 }
-
-*/
