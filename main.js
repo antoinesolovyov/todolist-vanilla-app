@@ -32,15 +32,7 @@ for (let key of keys) {
     tableComponent.list.addItemComponent(itemComponent);
     tableComponent.bar.setTabsText(tableComponent.list);
 
-    // checkbox click event
-    itemComponent.checkbox.addEventListener("click", () => {
-		checkboxHandler(itemObject, itemComponent)
-	});
-
-    // delete click event
-    itemComponent.delete.addEventListener("click", () => {
-        deleteHandler(itemObject, itemComponent)
-    });
+    addEventListeners(itemObject, itemComponent);
 
     tableComponent.render();
 }
@@ -59,15 +51,7 @@ inputComponent.button.onclick = () => {
 
             localStorage.setItem(itemObject.id, JSON.stringify(itemObject));
 
-            // checkbox click event
-			itemComponent.checkbox.addEventListener("click", () => {
-				checkboxHandler(itemObject, itemComponent)
-			});
-
-            // delete click event
-            itemComponent.delete.addEventListener("click", () => {
-                deleteHandler(itemObject, itemComponent)
-            });
+            addEventListeners(itemObject, itemComponent);
 
             tableComponent.render();
         }
@@ -104,6 +88,28 @@ tableComponent.bar.all.addEventListener("click", () => {
 
     tableComponent.render();
 });
+
+function addEventListeners(itemObject, itemComponent) {
+	// checkbox click event
+	itemComponent.checkbox.addEventListener("click", () => {
+		checkboxHandler(itemObject, itemComponent)
+	});
+
+	// mouse enter event
+	itemComponent.item.addEventListener("mouseenter", () => {
+		itemComponent.delete.style.backgroundImage = "url('icons/x-icon.svg')";
+	});
+
+	// mouse leave event
+	itemComponent.item.addEventListener("mouseleave", () => {
+		itemComponent.delete.style.backgroundImage = "none";
+	});
+
+	// delete click event
+	itemComponent.delete.addEventListener("click", () => {
+		deleteHandler(itemObject, itemComponent)
+	});
+}
 
 // checkbox handler
 function checkboxHandler(itemObject, itemComponent) {
