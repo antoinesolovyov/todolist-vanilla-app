@@ -6,6 +6,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-family: Roboto Condensed;
 }
@@ -16,33 +17,66 @@ form {
   margin-bottom: 16px;
 }
 
-button {
-  background-image: url(icons/arrow-icon.svg);
-  background-repeat: no-repeat;
-  background-position: center;
+.authForm {
+  border: none;
+  flex-direction: column;
+  align-items: center;
+}
 
-  width: 48px;
+button {
+  font-family: "Roboto Condensed";
+  font-size: 16px;
+  font-weight: 400;
+
+  width: 240px;
   height: 48px;
 
   border: none;
   outline: none;
 }
 
+.signIn {
+  background: black;
+  outline: 2px solid black;
+  color: white;
+}
+
+.signUp {
+  outline: 2px solid black;
+  color: black;
+}
+
+.add {
+  background-image: url(icons/arrow-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+
+  width: 48px;
+}
+
 input {
-  width: 420px;
+  width: 216px;
   height: 48px;
-  border: none;
+  border: 2px solid black;
   outline: none;
   font-family: "Roboto Condensed";
   font-size: 16px;
   font-weight: 400;
-  padding: 0px 0px 0px 12px;
+  padding: 0px 12px;
+  margin-bottom: 16px;
 }
 
 input::placeholder {
   font-family: "Roboto Condensed";
   color: grey;
   font-weight: 400;
+}
+
+.inputTask {
+  width: 420px;
+  border: none;
+  padding: 0px 0px 0px 12px;
+  margin-bottom: 0px;
 }
 
 table {

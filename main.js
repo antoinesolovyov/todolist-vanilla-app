@@ -1,3 +1,5 @@
+import { FormComponent } from "./components/FormComponent.js";
+
 import { HeaderComponent } from "./components/HeaderComponent.js";
 import { FooterComponent } from "./components/FooterComponent.js";
 import { InputComponent } from "./components/InputComponent.js";
@@ -17,10 +19,17 @@ const footerComponent = new FooterComponent(footerAnchor);
 const inputComponent = new InputComponent(articleAnchor);
 const tableComponent = new TableComponent(articleAnchor);
 
+const formComponent = new FormComponent(articleAnchor);
+
 headerComponent.render();
+formComponent.render();
 footerComponent.render();
-inputComponent.render();
-tableComponent.render();
+//inputComponent.render();
+//tableComponent.render();
+
+/*
+
+try {
 
 // load items from local storage
 const keys = Object.keys(localStorage);
@@ -39,30 +48,26 @@ for (const key of keys) {
 
 // input button onclick
 inputComponent.button.onclick = () => {
-    try {
-        if (inputComponent.input.value) {
-            const itemObject = new ItemObject(
-                Date.now(),
-                inputComponent.input.value,
-                false
-            );
-            const itemComponent = new ItemComponent(itemObject);
+	if (inputComponent.input.value) {
+		const itemObject = new ItemObject(
+			Date.now(),
+			inputComponent.input.value,
+			false
+		);
+		const itemComponent = new ItemComponent(itemObject);
 
-            inputComponent.input.value = "";
+		inputComponent.input.value = "";
 
-            tableComponent.list.addItemComponent(itemComponent);
-            tableComponent.bar.setTabsText(tableComponent.list);
+		tableComponent.list.addItemComponent(itemComponent);
+		tableComponent.bar.setTabsText(tableComponent.list);
 
-            localStorage.setItem(itemObject.id, JSON.stringify(itemObject));
+		localStorage.setItem(itemObject.id, JSON.stringify(itemObject));
 
-            addEventListeners(itemObject, itemComponent);
+		addEventListeners(itemObject, itemComponent);
 
-            tableComponent.render();
-        }
-    } catch (e) {
-        console.log(e);
-    }
-
+		tableComponent.render();
+	}
+    
     return false;
 };
 
@@ -156,3 +161,9 @@ function deleteHandler(itemObject, itemComponent) {
     tableComponent.bar.setTabsText(tableComponent.list);
     tableComponent.render();
 }
+
+} catch(ex) {
+	console.log(ex);
+}
+
+*/
